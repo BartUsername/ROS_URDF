@@ -1,0 +1,7 @@
+1) colcon build
+2) in terminal to launch gazebo:: 
+$ ros2 launch urdf_example rsp_sim.launch.py
+3) in new terminal, for control angle script:
+$ ros2 launch urdf_example steering.launch.py
+
+Is error vrij

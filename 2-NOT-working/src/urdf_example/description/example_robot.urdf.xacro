@@ -1,0 +1,374 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro"  name="robot">
+    
+
+<xacro:property name="lim_low" value="-0.524" />
+<xacro:property name="lim_upper" value="1.047" />
+
+
+<joint name="fixed" type="fixed">
+	<parent link="world" />
+	<child link="base_link" />
+</joint>
+
+<link name="world"></link>
+
+
+
+
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="-0.024506 -0.014061 -0.0039595"
+        rpy="0 0 0" />
+      <mass
+        value="995.19" />
+      <inertia
+        ixx="165.54"
+        ixy="-9.2519E-16"
+        ixz="2.8024E-16"
+        iyy="165.54"
+        iyz="5.2597E-16"
+        izz="166.59" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="./src/urdf_example/description/meshes/base_link.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0 0 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0.5"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="./src/urdf_example/description/meshes/base_link.stl" />
+      </geometry>
+    </collision>
+  </link>
+
+
+  <link
+    name="mount">
+    <inertial>
+      <origin
+        xyz="-0.010107 0.34766 0.0019112"
+        rpy="0 0 0" />
+      <mass
+        value="127.89" />
+      <inertia
+        ixx="5.1786"
+        ixy="0.32407"
+        ixz="-0.10427"
+        iyy="5.0461"
+        iyz="-0.16091"
+        izz="5.0086" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="./src/urdf_example/description/meshes/mount.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="./src/urdf_example/description/meshes/mount.stl" />
+      </geometry>
+    </collision>
+  </link>
+  
+  <joint
+    name="base_to_mount"
+    type="continuous">
+    <origin
+      xyz="-0.024506 -0.014061 0.44834"
+      rpy="1.5708 0 -0.4589" />
+    <parent
+      link="base_link" />
+    <child
+      link="mount" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      effort="10000000000000"
+      velocity="0.001" />
+  </joint>
+  
+  
+  
+  
+  <link
+    name="camera_link">
+    <inertial>
+      <origin
+        xyz="0.13768 -5.5511E-16 0.27867"
+        rpy="0 0 0" />
+      <mass
+        value="30.142" />
+      <inertia
+        ixx="0.40029"
+        ixy="-4.1675E-17"
+        ixz="0.010089"
+        iyy="0.3953"
+        iyz="4.1692E-18"
+        izz="0.41572" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="./src/urdf_example/description/meshes/camera.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="./src/urdf_example/description/meshes/camera.stl" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint
+    name="mount_to_camera"
+    type="revolute">
+    <origin
+      xyz="0.052413 0.3895 0.10608"
+      rpy="-0.015232 -0.00023486 -0.030834" />
+    <parent
+      link="mount" />
+    <child
+      link="camera_link" />
+    <axis
+      xyz="0.44296 0 0.89654" />
+    <limit
+      lower="-0.5236"
+      upper="1.0472"
+      effort="10000000000000"
+      velocity="0.01" />
+  </joint>
+  
+  
+  
+  
+  
+  <link
+    name="gun">
+    <inertial>
+      <origin
+        xyz="0.062789 0.031709 -0.031022"
+        rpy="0 0 0" />
+      <mass
+        value="15.447" />
+      <inertia
+        ixx="0.38276"
+        ixy="-0.31489"
+        ixz="0.30025"
+        iyy="0.85112"
+        iyz="0.15558"
+        izz="0.84212" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="./src/urdf_example/description/meshes/gun.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 0 0 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="./src/urdf_example/description/meshes/gun.stl" />
+      </geometry>
+    </collision>
+  </link>
+  
+  <joint
+    name="mount_to_gun"
+    type="revolute">
+    <origin
+      xyz="-0.089654 0.785 0.044296"
+      rpy="-0.18385 -0.035362 -0.37903" />
+    <parent
+      link="mount" />
+    <child
+      link="gun" />
+    <axis
+      xyz="0.44296 0 0.89654" />
+    <limit
+      lower="-0.5236"
+      upper="1.0472"
+      effort="10000000000000"
+      velocity="0.001" />
+  </joint>
+
+
+  
+
+
+
+
+
+    <gazebo reference="base_link">
+        <material>Gazebo/Green</material>
+    </gazebo>
+
+
+    <gazebo reference="mount">
+        <material>Gazebo/Blue</material>
+    </gazebo>
+    
+
+    <gazebo reference="camera_link">
+        <material>Gazebo/Black</material>
+    </gazebo>
+    
+
+    <gazebo reference="gun">
+        <material>Gazebo/Red</material>
+    </gazebo> 
+    
+
+
+
+    
+    
+    <joint name="camera_optical_joint" type="fixed">
+        <origin xyz="0 0 0" rpy="-1.571 0 -1.571" />
+        <parent link="camera_link" />
+        <child link="camera_link_optical" />
+    </joint>
+
+    <link name="camera_link_optical"></link>
+
+
+    <gazebo reference="camera_link">
+        <sensor type="camera" name="my_camera">
+            <update_rate>20</update_rate>
+            <visualize>true</visualize>
+            <camera name="cam">
+                <horizontal_fov>1.3962634</horizontal_fov>
+                <image>
+                    <width>640</width>
+                    <height>480</height>
+                    <format>R8B8G8</format>
+                </image>
+                <clip>
+                    <near>0.02</near>
+                    <far>300</far>
+                </clip>
+                <noise>
+                    <type>gaussian</type>
+                    <mean>0.0</mean>
+                    <stddev>0.007</stddev>
+                </noise>
+            </camera>
+            <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+                <frame_name>camera_link_optical</frame_name>
+                <min_depth>0.1</min_depth>
+                <max_depth>500</max_depth>
+            </plugin>
+        </sensor>
+    </gazebo>  
+
+
+
+
+    <gazebo>
+        <plugin name="gazebo_ros_joint_state_publisher"
+            filename="libgazebo_ros_joint_state_publisher.so">
+            <update_rate>100</update_rate>
+            <joint_name>base_to_mount</joint_name>
+            <joint_name>mount_to_camera</joint_name>
+            <joint_name>mount_to_gun</joint_name>         
+        </plugin>
+    </gazebo>
+    
+    <gazebo>
+        <plugin name="gazebo_ros_joint_pose_trajectory"
+            filename="libgazebo_ros_joint_pose_trajectory.so">
+            <update_rate>20</update_rate>
+        </plugin>
+    </gazebo>
+    
+    
+
+    <ros2_control name="GazeboSystem" type="system">
+      <hardware>
+        <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+      </hardware>
+      <joint name="base_to_mount">
+        <command_interface name="position"/>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+        <state_interface name="effort"/>        
+      </joint>
+      <joint name="mount_to_camera">
+        <command_interface name="position">
+        	<param name="min">${lim_low}</param>
+        	<param name="max">${lim_upper}</param>
+	</command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+        <state_interface name="effort"/>        
+      </joint>
+      <joint name="mount_to_gun">
+        <command_interface name="position">
+        	<param name="min">${lim_low}</param>
+        	<param name="max">${lim_upper}</param>        
+	</command_interface>        
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+        <state_interface name="effort"/>        
+      </joint>      
+    </ros2_control>  
+    
+    
+    <gazebo>
+      <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+        <parameters>$(find urdf_example)/config/controller_configuration.yaml</parameters>
+      </plugin>
+    </gazebo>
+
+</robot>

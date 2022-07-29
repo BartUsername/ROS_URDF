@@ -1,0 +1,12 @@
+1) colcon build
+2) in terminal to launch gazebo:: 
+$ ros2 launch urdf_example rsp_sim.launch.py
+3) in new terminal, for control angle script:
+$ ros2 launch urdf_example steering.launch.py
+
+Geeft als error: kan control.py niet vinden (waar het launch script naar verwijst)
+
+FileNotFoundError: [Errno 2] No such file or directory: '/home/bart/2-NOT-working/install/urdf_example/lib/urdf_example/control.py'
+
+
+Als control.py over-gecopied wordt van de werkende folder is het probleem weg; ook al is het script en filename identiek voor zover ik kan zien
